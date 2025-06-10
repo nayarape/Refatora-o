@@ -1,0 +1,45 @@
+@startuml
+class Livro {
+    - titulo: str
+    - autor: str
+    - ano: int
+    - quantidade: int
+    + emprestar(): void
+    + devolver(): void
+}
+
+class Usuario {
+    - nome: str
+    - id: int
+}
+
+class Emprestimo {
+    - usuario: Usuario
+    - livro: Livro
+    - data_emprestimo: date
+    - devolvido: bool
+    + devolver(): void
+}
+
+class Biblioteca {
+    - livros: List<Livro>
+    - usuarios: List<Usuario>
+    - emprestimos: List<Emprestimo>
+    + adicionar_livro(...)
+    + cadastrar_usuario(...)
+    + emprestar_livro(...)
+    + devolver_livro(...)
+    + calcular_multa(...)
+}
+
+class UsuarioNaoEncontradoException
+class LivroNaoEncontradoException
+class LivroIndisponivelException
+class EmprestimoNaoEncontradoException
+
+Biblioteca --> Livro : gerencia
+Biblioteca --> Usuario : gerencia
+Biblioteca --> Emprestimo : gerencia
+Emprestimo --> Usuario : associa
+Emprestimo --> Livro : associa
+@enduml
